@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
 // takes props:
 // user
 class NavBar extends Component {
     render() {
         return (
-            <div>
-                <p>NVOLV</p>
-            </div>
+            <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">NVOLV</NavbarBrand>
+            </Navbar>
         );
     }
 }
