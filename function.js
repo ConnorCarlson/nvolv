@@ -23,7 +23,7 @@ exports.makeLike = function(userID, postID, res) {
       }).then(result => {
         res.send({message: 'Transaction success!'});
       }).catch(err => {
-        res.send({message: 'Transaction failure:', err});
+        res.send({message: 'Transaction failure:'+ err});
       });
       
       //update poster balance
@@ -41,7 +41,7 @@ exports.makeLike = function(userID, postID, res) {
                     t.update(postUserRef, {balance: newBalance});
                 });
             }).then(result => {
-                res.send('Transaction success!');
+                res.send({message: 'Transaction success!'});
             }).catch(err => {
                 res.send('Transaction failure:', err);
             });
