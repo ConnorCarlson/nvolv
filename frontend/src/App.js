@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar.js';
 import Feed from './components/Feed.js';
+import Upload from './components/Upload';
+import UserSignIn from './components/UserSignIn';
+import UserSignUp from './components/UserSignUp';
+import { HashRouter, Route} from 'react-router-dom';
 class App extends Component {
+	
 	render() {
 		return (
-			<div>
-				<NavBar style={{marginBottom: '25px'}}></NavBar>
-				<Feed></Feed>
-			</div>
+			<HashRouter>
+				<NavBar style={{ marginBottom: '25px' }}></NavBar>
+				<Route path="/" exact component={Feed}/>
+				<Route path="/upload" component={Upload} />
+				<Route path="/signin" component={UserSignIn} />
+				<Route path="/signup" component={UserSignUp} />
+			</HashRouter>
 		);
 	}
 }

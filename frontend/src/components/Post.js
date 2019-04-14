@@ -22,7 +22,7 @@ class Post extends Component {
                     <CardTitle>{this.props.user}</CardTitle>
                     <CardImg src={this.props.image}></CardImg>
                     <LikeButton></LikeButton>
-                    <LikeCounter></LikeCounter>
+                    <LikeCounter likes={this.props.likes}></LikeCounter>
                 </CardBody>
             </Card>
         );
