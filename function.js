@@ -130,5 +130,18 @@ exports.makePost = function(desc, image, title, user, userID, res){
 }
 
 exports.withdraw = function(userID, amount) {
+  let userRef = db.collection("user").doc(userID);
+  let newBalance = null;
+  db.runTransaction(t => {
+    return t.get(userRef)
+      .then(doc => {
+        newBalance = doc.data().balance - amount;
+        t.update(userRef, {balance: newBalance});
+      });
+  }).then(result => {
+    res.send('Transaction success!');
+  }).catch(err => {
+    res.send('Transaction failure:', err);
+  });
   let postRef = db.collection("user").doc(userID);
 }
