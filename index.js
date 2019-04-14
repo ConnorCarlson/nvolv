@@ -1,15 +1,15 @@
+let { makeLike, deleteLike } = require('./function');
+
+
 let express = require('express');
 const bodyParser = require('body-parser');
 let app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 let PORT = 8080;
 
-// app.get("");
-
 app.post("/like", (req, res) => {
-    console.log(req.body)
-    res.send("Done");
+    makeLike("DTOnv13ywZbBPL2Sx0cV", "pScgRGMjuwbCFJS4n1RM", res);
 });
 
 app.listen(PORT, () => console.log(`Server on port ${PORT}`))
