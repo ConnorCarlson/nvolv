@@ -46,7 +46,7 @@ class LikeButton extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button color="danger" disabled={this.props.balance <= 0 ? true : false} title={this.props.balance < 0 && "You don't have any likes left!"} onClick={this.toggle}>Like</Button>
+				<Button color="danger" disabled={this.props.balance <= 0 ? true : false} title={this.props.balance < 0 ? "You don't have any likes left!" : undefined} onClick={this.toggle}>Like</Button>
 				<p>Liked by {this.state.likes} people.</p>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
 					{!firebase.auth().currentUser
