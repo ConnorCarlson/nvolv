@@ -5,7 +5,7 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<NavBar></NavBar>
+				<NavBar style={{marginBottom: '25px'}}></NavBar>
 				<Feed></Feed>
 			</div>
 		);
