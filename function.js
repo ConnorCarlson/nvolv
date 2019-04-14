@@ -151,5 +151,4 @@ exports.makeWithdraw = function (userID, amount, res) {
 	}).catch(err => {
 		res.send({ message: 'Transaction failure:' + err });
 	});
-	let postRef = db.collection("user").doc(userID);
 }

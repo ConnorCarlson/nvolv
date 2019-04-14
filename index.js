@@ -3,13 +3,12 @@ let { makeLike, deleteLike, makePost, makeWithdraw, makeBalance, getLikes } = re
 let express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-var router = express.Router();
 let app = express();
 app.use(bodyParser.json());
 
-let PORT = 8080;
+let PORT = process.env.PORT || 8080;
 
-process.env.NODE_ENV = "dev";
+process.env.NODE_ENV = "production";
 
 //Static file declaration
 app.use(express.static(path.join(__dirname, 'frontend/build')));
