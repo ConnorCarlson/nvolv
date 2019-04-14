@@ -6,6 +6,7 @@ import 'firebase/firestore';
 
 
 class Feed extends Component {
+	
 	constructor() {
 		super();
 		this.state = {
@@ -54,8 +55,7 @@ class Feed extends Component {
 								time = item.timestamp.seconds;
 							} else {
 								time = '0';
-							}
-							
+							}	
 							return (<Post userID={item.userID} user={item.user} postID={item.postID} lower={this.lowerBalance} 
 								balance={this.state.balance} image={item.image} likes={item.likes} desc={item.desc} title={item.title} 
 								timestamp={time} key={i}></Post>);

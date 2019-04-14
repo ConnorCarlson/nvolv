@@ -23,9 +23,10 @@ class Post extends Component {
 
     componentDidMount() {
         firebase.firestore().collection("users").doc(this.props.userID).get().then((doc) => {
+            console.log(this.props.userID)
             if (doc.exists) {
                 this.setState({
-                    pfpUrl: doc.data().photoUrl,
+                    pfpUrl: doc.data().photoURL,
                 })
             } else {
                 console.log("No such document!");

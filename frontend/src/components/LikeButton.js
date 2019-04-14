@@ -16,25 +16,6 @@ class LikeButton extends React.Component {
 		this.toggle = this.toggle.bind(this);
 	}
 
-  doLike = () => {
-    let userID = firebase.auth().currentUser.uid;
-    $.post({
-      url: 'http://localhost:8080/like',
-      method: 'POST',
-      dataType: 'json',
-      data: JSON.stringify({
-        postid: this.props.postID,
-        userid: userID
-      }),
-      contentType: 'application/json',
-      success: data => {
-        this.setState({
-          likes: data.newLikes
-        });
-      }
-    })
-    this.toggle();
-  }
 	toggle() {
 		this.setState(prevState => ({
 			modal: !prevState.modal
