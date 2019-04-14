@@ -128,3 +128,7 @@ exports.makePost = function(desc, image, title, user, userID, res){
         res.send('Creation fail:', err);
     });
 }
+
+exports.withdraw = function(userID, amount) {
+  let postRef = db.collection("user").doc(userID);
+}

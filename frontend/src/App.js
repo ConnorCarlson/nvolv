@@ -4,7 +4,10 @@ import Feed from './components/Feed.js';
 import Upload from './components/Upload';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
-import { HashRouter, Route} from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 class App extends Component {
 	
 	render() {

@@ -13,9 +13,6 @@ class Feed extends Component {
 		this.state = {
 			posts: null
 		}
-		// this.state = {
-		// 	posts: [{ user: "test", image: "./download.jpg" }, { user: "test2", image: "./download.jpg" }, { user: "test3", image: "./download.jpg" }]
-		// };
 	}
 
 	componentDidMount() {
