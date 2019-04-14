@@ -49,7 +49,6 @@ class Feed extends Component {
 				{
 					this.state.posts ?
 						(this.state.posts.map((item, i) => {
-							console.log(item);
 							let time;
 							if(item.timestamp) {
 								time = item.timestamp.seconds;

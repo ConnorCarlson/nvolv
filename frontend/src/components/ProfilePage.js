@@ -34,7 +34,6 @@ export default class ProfilePage extends Component {
                 this.setState({
                     user: firebaseUser
                 })
-                console.log(this.state.user);
                 firebase.firestore().collection("users").doc(this.state.user.uid).get().then((doc) => {
                     if (doc.exists) {
                         console.log("Document data:", doc.data());
