@@ -1,4 +1,4 @@
-let { makeLike, deleteLike, makePost } = require('./function');
+let { makeLike, deleteLike, makePost, makeWithdraw, makeBalance, getLikes } = require('./function');
 
 
 let express = require('express');
@@ -12,7 +12,7 @@ let PORT = 8080;
 
 app.route('/like')
     .get(function (req, res) {
-    res.send('Number of likes')
+    getLikes(req.body.postID, res)
     })
     .post(function (req, res) {
     makeLike(req.body.userid, req.body.postid, res)
@@ -38,13 +38,13 @@ app.route('/balance')
     })
     .post(function (req, res) {
     res.send('Add balance')
-    makeBalance(req.body.amount, req.body.userid)
+    makeBalance(req.body.amount, req.body.userid, res)
     })
 
 app.route('/withdraw')
     .post(function (req, res) {
     res.send('Withdraw monet')
-    makeWithdraw(req.body.userid, req.body.amount)
+    makeWithdraw(req.body.userid, req.body.amount, res)
     })
 
 app.listen(PORT, () => console.log(`Server on port ${PORT}`))

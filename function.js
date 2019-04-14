@@ -67,7 +67,7 @@ exports.makeLike = function(userID, postID, res) {
       });
 }
 
-exports.deleteLike = function(userID, postID) {
+exports.deleteLike = function(userID, postID, res) {
     console.log(userID, postID)
 }
 
@@ -80,19 +80,19 @@ exports.addBalance = function(userID, postID, amount, res) {
             t.update(userRef, {balance: newBalance});
           });
       }).then(result => {
-        res.send('Transaction success!');
+        res.send({message: 'Transaction success!'});
       }).catch(err => {
-        res.send('Transaction failure:', err);
+        res.send({message: 'Transaction failure:' + err});
       });
 }
 
-exports.getLikes = function(postID) {
+exports.getLikes = function(postID, res) {
   let postRef = db.collection("post").doc(postID);
   let likeNumber = null;
   postRef.get()
   .then(doc => {
     if (!doc.exists) {
-      res.send('No such document')
+      res.send({message: 'No such document'})
     } else {
       likeNumber = doc.data().likes;
     }
@@ -119,9 +119,9 @@ exports.makePost = function(desc, image, title, user, userID, res){
                 t.update(postRef, {postID: newID});
               });
           }).then(result => {
-            res.send('Transaction success!');
+            res.send({message: 'Transaction success!'});
           }).catch(err => {
-            res.send('Transaction failure:', err);
+            res.send({message: 'Transaction failure:' + err});
           });
         res.send({message: 'document created with id ' + ref.id});
     }).catch(err => {
@@ -129,7 +129,7 @@ exports.makePost = function(desc, image, title, user, userID, res){
     });
 }
 
-exports.withdraw = function(userID, amount) {
+exports.makeWithdraw = function(userID, amount, res) {
   let userRef = db.collection("user").doc(userID);
   let newBalance = null;
   db.runTransaction(t => {
@@ -139,9 +139,9 @@ exports.withdraw = function(userID, amount) {
         t.update(userRef, {balance: newBalance});
       });
   }).then(result => {
-    res.send('Transaction success!');
+    res.send({message: 'Transaction success!'});
   }).catch(err => {
-    res.send('Transaction failure:', err);
+    res.send({message: 'Transaction failure:' + err});
   });
   let postRef = db.collection("user").doc(userID);
 }
