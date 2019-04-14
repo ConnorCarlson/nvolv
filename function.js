@@ -67,8 +67,6 @@ exports.makeLike = function(userID, postID, res) {
       });
 }
 
-
-
 exports.deleteLike = function(userID, postID) {
     console.log(userID, postID)
 }
