@@ -26,6 +26,7 @@ export default class UserSignUp extends Component {
                     username: this.state.displayName,
                     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg',
                     balance: 0,
+                    postsLiked: [],
                     bio: ""
                 }
                 let userRef = firebase.firestore().collection("users").doc(`${id}`);
