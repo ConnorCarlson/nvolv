@@ -12,11 +12,12 @@ let db = admin.firestore();
 
 
 exports.makeLike = function(userID, postID, res) {
+    //update the liker user balance
     let userRef = db.collection("users").doc(userID);
     db.runTransaction(t => {
         return t.get(userRef)
           .then(doc => {
-            let newBalance = doc.data().balance - .1;
+            let newBalance = doc.data().balance - 1;
             t.update(userRef, {balance: newBalance});
           });
       }).then(result => {
@@ -24,20 +25,46 @@ exports.makeLike = function(userID, postID, res) {
       }).catch(err => {
         res.send('Transaction failure:', err);
       });
-    
-      postUserRef = db.collection("users").doc(postID.get(userID));
-      db.runTransaction(t => {
-        return t.get(userRef)
-          .then(doc => {
-            let newBalance = doc.data().balance + .1;
-            t.update(userRef, {balance: newBalance});
-          });
-      }).then(result => {
-        res.send('Transaction success!');
-      }).catch(err => {
-        res.send('Transaction failure:', err);
+      
+      //update poster balance
+      let postRef = db.collection('posts').doc(postID);
+      postRef.get()
+      .then(doc => {
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            postUserRef = db.collection("users").doc(doc.data().userID);
+            db.runTransaction(t => {
+                return t.get(postUserRef)
+                .then(doc => {
+                    let newBalance = doc.data().balance + 1;
+                    t.update(postUserRef, {balance: newBalance});
+                });
+            }).then(result => {
+                res.send('Transaction success!');
+            }).catch(err => {
+                res.send('Transaction failure:', err);
+            });
+            getPostUser = doc.data().userID;
+            console.log('Document data:', doc.data());
+        }
+      })
+      .catch(err => {
+        res.send('Error getting document', err);
       });
 
+      // update post likes
+      db.runTransaction(t => {
+        return t.get(postRef)
+          .then(doc => {
+            let newLikes = doc.data().likes + 1;
+            t.update(postRef, {likes: newLikes});
+          });
+      }).then(result => {
+        res.send('Transaction success!');
+      }).catch(err => {
+        res.send('Transaction failure:', err);
+      });
 
 }
 
