@@ -61,7 +61,7 @@ class Feed extends Component {
 								timestamp={time} key={i}></Post>);
 						}))
 						:
-						<div style={{ textAlign: 'center', margin: '40vh' }}>
+						<div style={{ textAlign: 'center', marginTop: '40vh' }}>
 							<Spinner></Spinner>
 						</div>
 				}

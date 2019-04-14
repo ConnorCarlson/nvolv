@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle } from 'reactstrap';
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle
+} from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
@@ -39,18 +41,17 @@ class Post extends Component {
         return (
             <Card className="responsive-card">
                 <CardBody>
-                    <div style={{marginBottom: '1rem'}}>
+                    <div style={{ marginBottom: '1rem' }}>
                         {this.state.pfpUrl &&
-                            <img alt="profile pic" src={this.state.pfpUrl} style={{width: '3rem', borderRadius: '50%', display: 'inline', marginRight: '1rem'}}></img>
-                            
+                            <img alt="profile pic" src={this.state.pfpUrl} style={{ width: '3rem', borderRadius: '50%', display: 'inline', marginRight: '1rem' }}></img>
+
                         }
-                        <p style={{display: 'inline'}}>{this.props.user}</p>
-                        <p style={{display: 'inline', textAlign: 'right', position: "absolute", right: '1rem', color: 'grey'}}>{this.getDate(this.props.timestamp)}</p>
+                        <p style={{ display: 'inline' }}>{this.props.user}</p>
+                        <p style={{ display: 'inline', textAlign: 'right', position: "absolute", right: '1rem', color: 'grey' }}>{this.getDate(this.props.timestamp)}</p>
                     </div>
                     <CardImg src={this.props.image}></CardImg>
-                    <CardTitle>{this.props.title}</CardTitle>
-                    <CardSubtitle>{this.props.desc}</CardSubtitle>
-                    <CardText></CardText>
+                    <h4 style={{ marginTop: '0.8rem', marginBottom: '1rem' }}>{this.props.title}</h4>
+                    <CardSubtitle style={{ marginBottom: '0.5rem' }}>{this.props.desc}</CardSubtitle>
                     <LikeButton postID={this.props.postID} lowerBalance={this.props.lower} balance={this.props.balance} likes={this.props.likes}></LikeButton>
                 </CardBody>
             </Card>
