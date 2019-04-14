@@ -11,7 +11,7 @@ class Post extends Component {
     
     render() {
         return (
-            <p>Liked by {this.props.likes} people.</p>
+            
         );
     }
 }
