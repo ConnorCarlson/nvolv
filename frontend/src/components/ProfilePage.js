@@ -106,7 +106,6 @@ export default class ProfilePage extends Component {
     }
 
     saveProfile = () => {
-        console.log(this.state);
         firebase.firestore().collection("users").doc(this.state.user.uid).set({
             username: this.state.username,
             bio: this.state.bio,
@@ -114,12 +113,10 @@ export default class ProfilePage extends Component {
         }, { merge: true }).then(() => {
             if (this.state.profilePic) {
                 let updateInfo = {};
-                console.log(this.state.user);
                 let profilePic = firebase.storage().ref(`posts/${this.state.user.uid}.jpg`);
                 profilePic.put(this.state.profilePic).then((snapshot) => {
                     snapshot.ref.getDownloadURL().then((url) => {
                         updateInfo.photoURL = url;
-                        console.log(updateInfo);
                         this.state.user.updateProfile(
                             updateInfo
                         ).then(() => {
