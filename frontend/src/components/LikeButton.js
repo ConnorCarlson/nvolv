@@ -34,7 +34,6 @@ class LikeButton extends React.Component {
 			}),
 			contentType: 'application/json',
 			success: data => {
-				this.props.lowerBalance();
 				this.setState({
 					likes: data.newLikes
 				});
@@ -46,25 +45,25 @@ class LikeButton extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button color="danger" disabled={this.props.balance <= 0 ? true : false} title={this.props.balance < 0 ? "You don't have any likes left!" : undefined} onClick={this.toggle}>Like</Button>
+				<Button color="danger" disabled={this.props.balance <= 0 ? true : false} title={this.props.balance < 0 ? "You don't have any exposure left!" : undefined} onClick={this.toggle}>EXP+</Button>
 				<p>Liked by {this.state.likes} people.</p>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
 					{!firebase.auth().currentUser
 						?
 						<div>
-							<ModalHeader toggle={this.toggle}>Like this post?</ModalHeader>
+							<ModalHeader toggle={this.toggle}>Spend exposure on this post?</ModalHeader>
 							<ModalBody>
-								<span>You are not signed in! Please sign in to like posts!</span>
+								<span>You are not signed in! Please sign in to spend exposure!</span>
 								<ModalFooter style={{ marginTop: '1rem' }}>
-									<Button color="primary" onClick={this.doLike}>Confirm</Button>
+									<Button color="secondary" onClick={this.toggle}>Cancel</Button>
 								</ModalFooter>
 							</ModalBody>
 						</div>
 						:
 						<div>
-							<ModalHeader toggle={this.toggle}>Like this post?</ModalHeader>
+							<ModalHeader toggle={this.toggle}>Spend exposure on this post?</ModalHeader>
 							<ModalBody>
-								Are you sure you want to like this photo?
+								Are you sure you want to spend exposure on this post?
           </ModalBody>
 							<ModalFooter>
 								<Button color="primary" onClick={this.doLike}>Confirm</Button>{' '}

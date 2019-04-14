@@ -220,11 +220,10 @@ export default class ProfilePage extends Component {
                     </FormGroup>
 
                     <Button onClick={this.saveProfile}>Save</Button>
-                    <h2 style={{ marginTop: '25px' }}>Manage Balance</h2>
-
+                    <h2 style={{ marginTop: '25px' }}>Manage Exposure Balance</h2>
                     <p>Current Balance: {this.state.balance}</p>
                     <FormGroup>
-                        <Label for="addBalance">Add Balance</Label>
+                        <Label for="addBalance">Add Exposure To Balance</Label>
                         <InputGroup>
                             <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToAdd", event.target.value)} value={this.state.balanceToAdd} placeholder="0" />
                             <Button onClick={() => this.updateBalance(parseInt(this.state.balanceToAdd), true)}>Add</Button>
@@ -233,10 +232,10 @@ export default class ProfilePage extends Component {
 
 
                     <FormGroup>
-                        <Label for="withdrawBalance">Withdraw Balance</Label>
+                        <Label for="withdrawBalance">Redeem Exposure</Label>
                         <InputGroup>
                             <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToWithdraw", event.target.value)} value={this.state.balanceToWithdraw} placeholder="0" />
-                            <Button onClick={() => this.updateBalance(parseInt(this.state.balanceToWithdraw), false)}>Withdraw</Button>
+                            <Button onClick={()=> this.updateBalance(parseInt(this.state.balanceToWithdraw), false)}>Redeem</Button>
                         </InputGroup>
                     </FormGroup>
                 </Form>
