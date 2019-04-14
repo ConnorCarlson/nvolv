@@ -1,11 +1,15 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import $ from 'jquery';
 
 class LikeButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      likes: this.props.likes
     };
 
     this.toggle = this.toggle.bind(this);
@@ -18,7 +22,23 @@ class LikeButton extends React.Component {
   }
 
   doLike = () => {
-    console.log("You liked it!");
+    let userID = firebase.auth().currentUser.uid;
+    $.post({
+      url: '/like',
+      method: 'POST',
+      dataType: 'json',
+      data: JSON.stringify({
+        postid: this.props.postID,
+        userid: userID
+      }),
+      contentType: 'application/json',
+      success: data => {
+        console.log(data);
+        this.setState({
+          likes: data.newLikes
+        });
+      }
+    })
     this.toggle();
   }
 
@@ -26,6 +46,7 @@ class LikeButton extends React.Component {
     return (
       <div>
         <Button color="danger" onClick={this.toggle}>Like</Button>
+        <p>Liked by {this.state.likes} people.</p>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Like this post?</ModalHeader>
           <ModalBody>
