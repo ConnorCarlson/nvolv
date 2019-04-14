@@ -1,4 +1,4 @@
-let { makeLike, deleteLike } = require('./function');
+let { makeLike, deleteLike, makePost } = require('./function');
 
 
 let express = require('express');
@@ -15,8 +15,7 @@ app.route('/like')
     res.send('Number of likes')
     })
     .post(function (req, res) {
-    //makeLike(req.body.userid, req.body.postid)
-    makeLike('DTOnv13ywZbBPL2Sx0cV', 'pScgRGMjuwbCFJS4n1RM', res)
+    makeLike(req.body.userid, req.body.postid, res)
     })
 
 app.route('/userid')
@@ -25,13 +24,12 @@ app.route('/userid')
     })
 
 
-app.route('/postid')
+app.route('/post')
     .get(function (req, res) {
     res.send('Get a Post ID')
     })
     .post(function (req, res) {
-    res.send('Post Post ID')
-    makePost(req.body.photo, req.body.userid, req.body.desc)
+    makePost(req.body.desc, req.body.photo, req.body.title, req.body.user, req.body.userid, res)
     })
 
 app.route('/balance')
