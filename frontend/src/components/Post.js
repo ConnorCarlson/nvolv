@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+    CardTitle, CardSubtitle } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 import LikeButton from './LikeButton';
-
-const postStyle = {
-    width: '50vw',
-    margin: 'auto',
-    marginBottom: '25px' 
-};
 
 class Post extends Component {
 
@@ -43,11 +37,11 @@ class Post extends Component {
     }
     render() {
         return (
-            <Card style={postStyle}>
+            <Card className="responsive-card">
                 <CardBody>
                     <div style={{marginBottom: '1rem'}}>
                         {this.state.pfpUrl &&
-                            <img src={this.state.pfpUrl} style={{width: '3rem', borderRadius: '50%', display: 'inline', marginRight: '1rem'}}></img>
+                            <img alt="profile pic" src={this.state.pfpUrl} style={{width: '3rem', borderRadius: '50%', display: 'inline', marginRight: '1rem'}}></img>
                             
                         }
                         <p style={{display: 'inline'}}>{this.props.user}</p>

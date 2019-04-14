@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, FormGroup, Form, Label, Button, FormText, Spinner } from 'reactstrap';
+import { Input, FormGroup, Label, Button, FormText, Spinner } from 'reactstrap';
 import ReactCrop from 'react-image-crop';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -90,7 +90,7 @@ export default class Upload extends Component {
         });
         let { file, desc, title } = this.state;
         let { uid, displayName } = firebase.auth().currentUser;
-        let fileRef = firebase.storage().ref(`posts/${uid + file.name}`);
+        let fileRef = firebase.storage().ref(`posts/${uid + Date.now()}`);
         fileRef.put(file).then((snapshot) => {
             snapshot.ref.getDownloadURL().then((url) => {
                 $.post({

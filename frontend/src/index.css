@@ -13,5 +13,15 @@ code {
     monospace;
 }
 
-.spread {
+.responsive-card {
+  width: 75vw;
+  margin: auto;
+  margin-bottom: 25px; 
+}
+
+@media (min-width: 660px) {
+  .responsive-card {
+    width: 50vw;
+  }
+
 }

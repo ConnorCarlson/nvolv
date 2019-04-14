@@ -38,7 +38,7 @@ class NavBar extends Component {
             <Navbar color="light" light expand="md" sticky='top' style={{ marginBottom: '25px' }}>
                 <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <NavbarBrand href="#/">NVOLV
-                    <img style={{ height: '2rem', marginLeft: '0.8rem'}} src="/symbol.png"></img>
+                    <img alt="logo" style={{ height: '2rem', marginLeft: '0.8rem'}} src="/symbol.png"></img>
                     </NavbarBrand>
                     <NavItem>
                         <Link to="/upload">
