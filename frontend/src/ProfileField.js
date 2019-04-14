@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
-import 'firebase/database';
+import 'firebase/firestore';
 import 'firebase/storage';
 import characterOptions from './CharacterOptions';
 import ReactCrop from 'react-image-crop';
@@ -58,6 +58,32 @@ export default class ProfileField extends Component {
 
 	componentWillUnmount() {
 		this.userRef.off();
+	}
+
+	getCroppedImg(image, pixelCrop, fileName) {
+		const canvas = document.createElement('canvas');
+		canvas.width = pixelCrop.width;
+		canvas.height = pixelCrop.height;
+		const ctx = canvas.getContext('2d');
+		ctx.drawImage(
+			image,
+			pixelCrop.x,
+			pixelCrop.y,
+			pixelCrop.width,
+			pixelCrop.height,
+			0,
+			0,
+			pixelCrop.width,
+			pixelCrop.height
+		);
+		return new Promise((resolve, reject) => {
+			canvas.toBlob(blob => {
+				blob.name = fileName;
+				window.URL.revokeObjectURL(this.fileUrl);
+				this.fileUrl = window.URL.createObjectURL(blob);
+				resolve([blob, this.fileUrl]);
+			}, 'image/jpeg')
+		}).then((array) => this.setState({ profilePic: array[0], picUrl: array[1], dataUrl: null }));
 	}
 
 	getCroppedImg(image, pixelCrop, fileName) {
