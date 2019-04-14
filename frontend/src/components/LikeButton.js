@@ -53,7 +53,6 @@ class LikeButton extends React.Component {
 			}),
 			contentType: 'application/json',
 			success: data => {
-				this.props.lowerBalance();
 				this.setState({
 					likes: data.newLikes
 				});
