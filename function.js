@@ -125,7 +125,7 @@ exports.makePost = function(desc, image, title, user, userID, res){
           });
         res.send({message: 'document created with id ' + ref.id});
     }).catch(err => {
-        res.send('Creation fail:', err);
+        res.send({message: 'Creation fail:' + err});
     });
 }
 
