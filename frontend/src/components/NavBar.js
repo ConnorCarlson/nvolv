@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavbarBrand, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fontawesome/react-fontawesome';
-import { faArrowCircleUp, faIdCard } from '@fontawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleUp, faIdCard } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
