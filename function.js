@@ -117,7 +117,8 @@ exports.makePost = function (desc, image, title, user, userID, res) {
 		title: title,
 		user: user,
         userID: userID,
-        timestamp: admin.firestore.FieldValue.serverTimestamp()
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        userLikes: []
 	})
 		.then(ref => {
 			let postRef = db.collection('posts').doc(ref.id);
