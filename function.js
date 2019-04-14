@@ -31,7 +31,7 @@ exports.makeLike = function(userID, postID, res) {
       postRef.get()
       .then(doc => {
         if (!doc.exists) {
-            console.log('No such document!');
+            res.send({message: 'No such document!'});
         } else {
             postUserRef = db.collection("users").doc(doc.data().userID);
             db.runTransaction(t => {
@@ -43,10 +43,10 @@ exports.makeLike = function(userID, postID, res) {
             }).then(result => {
                 res.send({message: 'Transaction success!'});
             }).catch(err => {
-                res.send('Transaction failure:', err);
+                res.send({message: 'Transaction failure:', err});
             });
             getPostUser = doc.data().userID;
-            console.log('Document data:', doc.data());
+            res.send({message: 'Document data:' + doc.data()});
         }
       })
       .catch(err => {
@@ -65,10 +65,6 @@ exports.makeLike = function(userID, postID, res) {
       }).catch(err => {
         res.send('Transaction failure:', err);
       });
-}
-
-exports.deleteLike = function(userID, postID, res) {
-    console.log(userID, postID)
 }
 
 exports.addBalance = function(userID, postID, amount, res) {
