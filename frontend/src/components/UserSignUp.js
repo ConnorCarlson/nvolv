@@ -22,8 +22,7 @@ export default class UserSignUp extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((firebaseUser) => {
                 let id = firebaseUser.user.uid;
-                let data = {
-                    name: "", 
+                let data = { 
                     username: this.state.displayName,
                     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg',
                     balance: 0,

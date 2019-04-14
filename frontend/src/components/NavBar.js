@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavbarBrand, Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -34,10 +36,12 @@ class NavBar extends Component {
     render() {
         return (
             <Navbar color="light" light expand="md" sticky='top' style={{marginBottom: '25px'}}>
-                <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <NavbarBrand href="#/">NVOLV</NavbarBrand>
                     <NavItem>
-                        <Link to="/upload">Upload</Link>
+                        <Link to="/upload">
+                            <FontAwesomeIcon icon={faArrowCircleUp} size="3x" color="black" style={{ marginRight: '0.8rem' }} />
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <Link to="/profile">User Preferences</Link>

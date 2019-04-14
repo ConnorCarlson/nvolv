@@ -12,12 +12,15 @@ let db = admin.firestore();
 
 // make like and update the balance of the user that likes
 exports.makeLike = function (userID, postID, res) {
-	//update the liker user balance
-	let userRef = db.collection("users").doc(userID);
+    //update the liker user balance and posts user has liked
+    let userRef = db.collection("users").doc(userID);
 	db.runTransaction(t => {
 		return t.get(userRef)
 			.then(doc => {
-				let newBalance = doc.data().balance - 1;
+                let newBalance = doc.data().balance - 1;
+                let newArray = doc.data().postsLiked;
+                newArray.push(postID);
+                t.update(userRef, {postsLiked: newArray});
 				t.update(userRef, { balance: newBalance });
 			});
 	}).then(result => {
@@ -29,29 +32,42 @@ exports.makeLike = function (userID, postID, res) {
 					res.send({ message: 'No such document!' });
 				} else {
 					postUserRef = db.collection("users").doc(doc.data().userID);
-					// Updating balance of poster
+                    // Updating balance of poster
 					db.runTransaction(t => {
 						return t.get(postUserRef)
-							.then(doc => {
-								let newBalance = doc.data().balance + 1;
-								t.update(postUserRef, { balance: newBalance });
+							.then(poster => {
+								let newBalancePoster = poster.data().balance + 1;
+								t.update(postUserRef, { balance: newBalancePoster });
 							});
-					}).then(result => {
-						// Updating likes of post
-						db.runTransaction(t => {
+					}).then(doc => {
+                        // update people who liked post
+                        db.runTransaction(t => {
 							return t.get(postRef)
 								.then(doc => {
-									let newLikes = doc.data().likes + 1;
-									t.update(postRef, { likes: newLikes });
-									return newLikes;
+                                    let newArray = doc.data().userLikes;
+                                    newArray.push(userID);
+									t.update(postRef, { userLikes: newArray });
 								});
 						}).then(result => {
-							res.send({ newLikes: result, message: 'Transaction success!' });
+                            // Updating likes of post
+                            db.runTransaction(t => {
+                                return t.get(postRef)
+                                    .then(doc => {
+                                        let newLikes = doc.data().likes + 1;
+                                        t.update(postRef, { likes: newLikes });
+                                        return newLikes;
+                                    });
+                            }).then(result => {
+                                res.send({ newLikes: result, message: 'Transaction success!' });
+                            }).catch(err => {
+                                res.send('Transaction failure 4:', err);
+                            });
 						}).catch(err => {
-							res.send('Transaction failure:', err);
+							res.send('Transaction failure 3:', err);
 						});
+						
 					}).catch(err => {
-						res.send({ message: 'Transaction failure:', err });
+						res.send({ message: 'Transaction failure: ', err });
 					});
 				}
 			})
@@ -59,7 +75,7 @@ exports.makeLike = function (userID, postID, res) {
 				res.send('Error getting document', err);
 			});
 	}).catch(err => {
-		res.send({ message: 'Transaction failure:' + err });
+		res.send({ message: 'Transaction failure: ' + err });
 	});
 }
 

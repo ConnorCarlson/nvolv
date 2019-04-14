@@ -10,9 +10,6 @@ const postStyle = {
     marginBottom: '25px' 
 };
 
-// takes props:
-// user
-// image
 class Post extends Component {
 
     render() {
@@ -21,10 +18,10 @@ class Post extends Component {
                 <CardBody>
                     <CardTitle>{this.props.user}</CardTitle>
                     <CardImg src={this.props.image}></CardImg>
-                    <LikeButton postID={this.props.postID} likes={this.props.likes}></LikeButton>
                     <CardTitle>{this.props.title}</CardTitle>
                     <CardSubtitle>{this.props.desc}</CardSubtitle>
                     <CardText></CardText>
+                    <LikeButton postID={this.props.postID} lowerBalance={this.props.lower} balance={this.props.balance} likes={this.props.likes}></LikeButton>
                 </CardBody>
             </Card>
         );
