@@ -14,7 +14,7 @@ class App extends Component {
 	render() {
 		return (
 			<HashRouter>
-				<NavBar style={{ marginBottom: '25px' }}></NavBar>
+				<NavBar style={{ marginBottom: '25px', position: 'fixed' }}></NavBar>
 				<Switch>
 					<Route path="/" exact component={Feed} />
 					<Route path="/upload" component={Upload} />

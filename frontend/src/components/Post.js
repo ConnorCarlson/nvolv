@@ -22,6 +22,9 @@ class Post extends Component {
                     <CardTitle>{this.props.user}</CardTitle>
                     <CardImg src={this.props.image}></CardImg>
                     <LikeButton postID={this.props.postID} likes={this.props.likes}></LikeButton>
+                    <CardTitle>{this.props.title}</CardTitle>
+                    <CardSubtitle>{this.props.desc}</CardSubtitle>
+                    <CardText></CardText>
                 </CardBody>
             </Card>
         );

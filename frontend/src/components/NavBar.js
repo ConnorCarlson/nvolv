@@ -33,11 +33,14 @@ class NavBar extends Component {
 
     render() {
         return (
-            <Navbar color="light" light expand="md">
+            <Navbar color="light" light expand="md" sticky='top' style={{marginBottom: '25px'}}>
                 <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <NavbarBrand href="#/">NVOLV</NavbarBrand>
                     <NavItem>
                         <Link to="/upload">Upload</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/profile">User Preferences</Link>
                     </NavItem>
                     <NavItem>
                         {this.state.user ?

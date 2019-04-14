@@ -24,7 +24,7 @@ class LikeButton extends React.Component {
   doLike = () => {
     let userID = firebase.auth().currentUser.uid;
     $.post({
-      url: '/like',
+      url: 'http://localhost:8080/like',
       method: 'POST',
       dataType: 'json',
       data: JSON.stringify({
