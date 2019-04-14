@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Input, Button, Alert, Container } from 'reactst
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
 
 export default class UserSignUp extends Component {
 
@@ -24,11 +24,11 @@ export default class UserSignUp extends Component {
                 let id = firebaseUser.user.uid;
                 let data = {
                     name: "", 
-                    username: "",
+                    username: this.state.displayName,
                     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'
                 }
-                let userRef = firebase.database().ref("user").child(`${id}`);
-                userRef.set({ data: data })
+                let userRef = firebase.firestore().collection("users").doc(`${id}`);
+                userRef.set(data);
                 firebase.auth().currentUser.updateProfile({
                     displayName: this.state.displayName,
                     photoURL: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'

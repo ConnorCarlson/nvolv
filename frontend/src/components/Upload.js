@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, FormGroup, Form, Label, Button, FormText } from 'reactstrap';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import DetectUser from './DetectUser';
 
 export default class Upload extends Component {
 
@@ -64,6 +65,7 @@ export default class Upload extends Component {
     render() {
         return (
             <div>
+            <DetectUser />
                 <FormGroup>
                     <Label for="exampleFile">Profile Picture</Label>
                     <Input type="file" name="file" accept=".jpg,.png,.jpeg,.gif" onChange={(event) => {
