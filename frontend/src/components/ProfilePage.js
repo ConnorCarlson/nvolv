@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, InputGroup } from 'reactstrap';
 
 
 
@@ -58,7 +58,7 @@ export default class ProfilePage extends Component {
     }
 
     componentWillUnmount() {
-        // this.authUnregFunc();
+        this.authUnregFunc();
     }
 
     getCroppedImg(image, pixelCrop, fileName) {
@@ -124,7 +124,9 @@ export default class ProfilePage extends Component {
         console.log(amount + this.state.balance)
         if(add) {
             // no verifications.. for now
+            this.setState({balanceToAdd: 0});
         } else {
+            this.setState({balanceToWithdraw: 0});
             amount = amount * -1;
             if(this.state.balance - amount > 0) {
                 console.log("Error: can't withdraw more than current balance");
@@ -147,7 +149,8 @@ export default class ProfilePage extends Component {
     render() {
         return (
             <div>
-                <Form>
+                <Form style={{width: '80vw', margin: "auto"}}>
+                <h2 style={{marginTop: '25px'}}>Edit Profile</h2>
                 <FormGroup>
 							<Label for="exampleFile">Profile Picture</Label>
 							<Input type="file" name="file" accept=".jpg,.png,.jpeg,.gif" onChange={(event) => {
@@ -181,7 +184,6 @@ export default class ProfilePage extends Component {
 						</FormGroup>  
 
 
-
                     <FormGroup>
                         <Label for="exampleEmail">Email</Label>
                         <Input type="email" disabled name="email" id="exampleEmail" onChange={(event) => this.updateValue("email", event.target.value)} value={this.state.email} placeholder="Email" />
@@ -197,17 +199,24 @@ export default class ProfilePage extends Component {
                     
                     
                     <Button onClick={this.saveProfile}>Save</Button>
+                    <h2 style={{marginTop: '25px'}}>Manage Balance</h2>
+
                     <p>Current Balance: {this.state.balance}</p>
                     <FormGroup>
-                        <Label for="exampleEmail">Add Balance</Label>
-                        <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToWithdraw", event.target.value)} value={this.state.balanceToWithdraw} placeholder="0" />
-                        <Button onClick={()=> this.updateBalance(parseInt(this.state.balanceToWithdraw), true)}>Add</Button>
+                        <Label for="addBalance">Add Balance</Label>
+                        <InputGroup>
+                            <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToAdd", event.target.value)} value={this.state.balanceToAdd} placeholder="0" />
+                            <Button onClick={()=> this.updateBalance(parseInt(this.state.balanceToAdd), true)}>Add</Button>
+                        </InputGroup>
                     </FormGroup>
 
+
                     <FormGroup>
-                        <Label for="exampleEmail">Withdraw Balance</Label>
-                        <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToAdd", event.target.value)} value={this.state.balanceToAdd} placeholder="0" />
-                        <Button onClick={()=> this.updateBalance(parseInt(this.state.balanceToWithdraw), false)}>Withdraw</Button>
+                        <Label for="withdrawBalance">Withdraw Balance</Label>
+                        <InputGroup>
+                            <Input type="number" name="email" id="exampleEmail" onChange={(event) => this.updateValue("balanceToWithdraw", event.target.value)} value={this.state.balanceToWithdraw} placeholder="0" />
+                            <Button onClick={()=> this.updateBalance(parseInt(this.state.balanceToWithdraw), false)}>Withdraw</Button>
+                        </InputGroup>
                     </FormGroup>
 
 

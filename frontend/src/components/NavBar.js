@@ -35,13 +35,16 @@ class NavBar extends Component {
 
     render() {
         return (
-            <Navbar color="light" light expand="md">
+            <Navbar color="light" light expand="md" sticky='top' style={{marginBottom: '25px'}}>
                 <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <NavbarBrand href="#/">NVOLV</NavbarBrand>
                     <NavItem>
                         <Link to="/upload">
                             <FontAwesomeIcon icon={faArrowCircleUp} size="3x" color="black" style={{ marginRight: '0.8rem' }} />
                         </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/profile">User Preferences</Link>
                     </NavItem>
                     <NavItem>
                         {this.state.user ?
