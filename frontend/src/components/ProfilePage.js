@@ -172,15 +172,18 @@ export default class ProfilePage extends Component {
 										}}>Apply crop</Button>
 									</div>
 								</React.Fragment>}
-							{this.state.picUrl && <div>
+                            {this.state.picUrl ? 
+                             <div>
 								<h2 style={{ marginTop: '1rem' }}>Cropped Picture</h2>
 								<p className="lead">Click update to finalize your cropped picture!</p>
 								<img src={this.state.picUrl} width="200" alt="cropped"></img>
-							</div>}
+                            </div>
+                            :
+                            <img src={this.state.photoUrl} alt="profile" width="200" height="auto"></img>
+                            }
 							<FormText color="muted">
 								Update your profile picture here!
           			        </FormText>
-							<img src={this.state.photoUrl} alt="profile" width="200" height="auto"></img>
 						</FormGroup>  
 
 
