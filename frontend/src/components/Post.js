@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle
+    Card, CardImg, CardBody,
+    CardSubtitle
 } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
