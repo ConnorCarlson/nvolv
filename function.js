@@ -116,7 +116,9 @@ exports.makePost = function (desc, image, title, user, userID, res) {
 		postID: null,
 		title: title,
 		user: user,
-		userID: userID
+        userID: userID,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        userLikes: []
 	})
 		.then(ref => {
 			let postRef = db.collection('posts').doc(ref.id);
@@ -131,7 +133,6 @@ exports.makePost = function (desc, image, title, user, userID, res) {
 			}).catch(err => {
 				res.send({ message: 'Transaction failure:' + err });
 			});
-			res.send({ message: 'document created with id ' + ref.id });
 		}).catch(err => {
 			res.send({ message: 'Creation fail:' + err });
 		});
