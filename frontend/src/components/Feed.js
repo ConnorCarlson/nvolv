@@ -14,7 +14,7 @@ class Feed extends Component {
 	}
 
 	componentDidMount() {
-		firebase.firestore().collection("posts").get().then((querySnapshots) => {
+		firebase.firestore().collection("posts").orderBy('timestamp', 'desc').get().then((querySnapshots) => {
 			let posts = [];
 			querySnapshots.forEach((doc) => {
 				posts.push(doc.data());
