@@ -99,3 +99,9 @@ exports.getLikes = function(postID) {
   })
   return likeNumber;
 }
+
+exports.withdraw = function(userID, amount) {
+  let postRef = db.collection("user").doc(userID);
+
+
+}
