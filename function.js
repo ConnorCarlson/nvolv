@@ -9,7 +9,7 @@ admin.initializeApp({
 });
 
 let db = admin.firestore();
-
+res.send({message: 'document created with id ' + ref.id})
 // make like and update the balance of the user that likes
 exports.makeLike = function(userID, postID, res) {
     //update the liker user balance
@@ -21,9 +21,9 @@ exports.makeLike = function(userID, postID, res) {
             t.update(userRef, {balance: newBalance});
           });
       }).then(result => {
-        res.send('Transaction success!');
+        res.send({message: 'Transaction success!'});
       }).catch(err => {
-        res.send('Transaction failure:', err);
+        res.send({message: 'Transaction failure:', err});
       });
       
       //update poster balance
