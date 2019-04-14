@@ -92,12 +92,41 @@ exports.getLikes = function(postID) {
   postRef.get()
   .then(doc => {
     if (!doc.exists) {
-      console.log('No such document')
+      res.send('No such document')
     } else {
       likeNumber = doc.data().likes;
     }
   })
   return likeNumber;
+}
+
+exports.makePost = function(desc, image, title, user, userID, res){
+    db.collection("posts").add({
+        desc: desc,
+        image: image,
+        likes: 0,
+        postID: null,
+        title: title,
+        user: user,
+        userID: userID
+    })
+    .then(ref => {
+        let postRef = db.collection('posts').doc(ref.id);
+        db.runTransaction(t => {
+            return t.get(postRef)
+              .then(doc => {
+                let newID = ref.id;
+                t.update(postRef, {postID: newID});
+              });
+          }).then(result => {
+            res.send('Transaction success!');
+          }).catch(err => {
+            res.send('Transaction failure:', err);
+          });
+        res.send({message: 'document created with id ' + ref.id});
+    }).catch(err => {
+        res.send('Creation fail:', err);
+    });
 }
 
 exports.withdraw = function(userID, amount) {
@@ -114,4 +143,5 @@ exports.withdraw = function(userID, amount) {
   }).catch(err => {
     res.send('Transaction failure:', err);
   });
+  let postRef = db.collection("user").doc(userID);
 }
