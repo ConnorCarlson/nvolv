@@ -15,8 +15,8 @@ app.route('/like')
     res.send('Number of likes')
     })
     .post(function (req, res) {
-    res.send('Like EYYYYY')
-    makeLike(req.body.userid, req.body.postid)
+    //makeLike(req.body.userid, req.body.postid)
+    makeLike('DTOnv13ywZbBPL2Sx0cV', 'pScgRGMjuwbCFJS4n1RM', res)
     })
 
 app.route('/userid')
@@ -24,7 +24,6 @@ app.route('/userid')
     res.send('Get a User ID')
     })
 
-app.listen(PORT, () => console.log(`Server on port ${PORT}`))
 
 app.route('/postid')
     .get(function (req, res) {
@@ -50,6 +49,7 @@ app.route('/withdraw')
     makeWithdraw(req.body.userid, req.body.amount)
     })
 
+app.listen(PORT, () => console.log(`Server on port ${PORT}`))
 
 
 
