@@ -9,6 +9,10 @@ import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 class App extends Component {
 
+	componentDidMount() {
+		document.title = "Nvolv";
+	}
+
 	render() {
 		return (
 			<HashRouter>

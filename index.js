@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 let PORT = process.env.PORT || 8080;
 
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "development";
 
 //production mode
 if (process.env.NODE_ENV === 'production') {
@@ -18,6 +18,8 @@ if (process.env.NODE_ENV === 'production') {
         res.sendfile(path.join(__dirname = 'frontend/index.html'));
     })
 } else {
+    app.use(express.static(path.join(__dirname, 'frontend/build')));
+
     //build mode
     app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname + '/frontend/public/index.html'));
