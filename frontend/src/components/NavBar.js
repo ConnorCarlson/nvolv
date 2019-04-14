@@ -34,13 +34,15 @@ class NavBar extends Component {
     render() {
         return (
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="#/">NVOLV</NavbarBrand>
-                <Nav>
+                <Nav style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                    <NavbarBrand href="#/">NVOLV</NavbarBrand>
+                    <NavItem>
+                        <Link to="/upload">Upload</Link>
+                    </NavItem>
                     <NavItem>
                         {this.state.user ?
                             <Button onClick={() => {
                                 firebase.auth().signOut();
-                                this.compress();
                             }} color="danger">Log Out</Button>
                             :
                             <Link to="/signin">

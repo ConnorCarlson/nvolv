@@ -25,7 +25,7 @@ export default class UserSignIn extends Component {
         event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((firebaseUser) => {
-                window.location.hash = "#/home"
+                window.location.hash = "#/"
             }).catch((err) => this.setState({ errorMessage: err.message }));
     }
 
@@ -40,7 +40,7 @@ export default class UserSignIn extends Component {
                         </Link>
                     </div>
                     */}
-                    <Form style={{ width: "50%", marginLeft: 'auto', marginRight: 'auto' }}>
+                    <Form autoComplete="false" style={{ width: "50%", marginLeft: 'auto', marginRight: 'auto' }}>
                         <FormGroup>
                             <Label for="email">Email</Label>
                             <Input type="email" name="email" autoComplete="email" value={this.state.email} onChange={(event) => this.updateValue("email", event.target.value)} id="email" placeholder="Email" />

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Post from './Post';
-import { Spinner } from 'reactstrap';
-import { Button } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 import firebase from 'firebase';
 import 'firebase/firestore';
-import Upload from './Upload';
 
 
 class Feed extends Component {
@@ -23,7 +21,7 @@ class Feed extends Component {
 			});
 			console.log(posts);
 			this.setState({
-				posts: posts 
+				posts: posts
 			});
 		});
 	}
@@ -32,10 +30,14 @@ class Feed extends Component {
 		return (
 			<div>
 				{
-					this.state.posts &&
-					(this.state.posts.map(function (item, i) {
-						return (<Post user={item.user} image={item.image} likes={item.likes} key={i}></Post>);
-					}))
+					this.state.posts ?
+						(this.state.posts.map(function (item, i) {
+							return (<Post user={item.user} image={item.image} likes={item.likes} key={i}></Post>);
+						}))
+						:
+						<div style={{ textAlign: 'center', margin: '40vh' }}>
+							<Spinner></Spinner>
+						</div>
 				}
 				<div className='text-center'>
 					<Button color='primary'>Show More</Button>
