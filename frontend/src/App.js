@@ -6,8 +6,6 @@ import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import ProfilePage from './components/ProfilePage';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
-import firebase from 'firebase/app';
-import 'firebase/auth';
 
 class App extends Component {
 

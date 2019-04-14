@@ -120,28 +120,28 @@ export default class ProfilePage extends Component {
     // amount {int} - int value to change
     // add  {boolean} - true or false (to withdraw)
     updateBalance(amount, add) {
-        console.log(amount);
-        console.log(amount + this.state.balance)
         if(add) {
             // no verifications.. for now
             this.setState({balanceToAdd: 0});
         } else {
+            
             this.setState({balanceToWithdraw: 0});
-            amount = amount * -1;
-            if(this.state.balance - amount > 0) {
+            if(this.state.balance < amount) {
                 console.log("Error: can't withdraw more than current balance");
                 return;
             }
+            amount = amount * -1;
         }
-
+        
+        let newBal = this.state.balance + amount;
         this.setState({balance: this.state.balance + amount});
 
         firebase.firestore().collection("users").doc(this.state.user.uid).set({
-            balance: this.state.balance
-        }, {merge: true}).then(function() {
-            console.log("Document successfully written!");
+            balance: newBal
+        }, {merge: true}).then(() => {
+            console.log("Document successfully written!" + this.state.balance + newBal);
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.error("Error writing document: ", error);
         });
     } 
@@ -172,15 +172,18 @@ export default class ProfilePage extends Component {
 										}}>Apply crop</Button>
 									</div>
 								</React.Fragment>}
-							{this.state.picUrl && <div>
+                            {this.state.picUrl ? 
+                             <div>
 								<h2 style={{ marginTop: '1rem' }}>Cropped Picture</h2>
 								<p className="lead">Click update to finalize your cropped picture!</p>
 								<img src={this.state.picUrl} width="200" alt="cropped"></img>
-							</div>}
+                            </div>
+                            :
+                            <img src={this.state.photoUrl} alt="profile" width="200" height="auto"></img>
+                            }
 							<FormText color="muted">
 								Update your profile picture here!
           			        </FormText>
-							<img src={this.state.photoUrl} alt="profile" width="200" height="auto"></img>
 						</FormGroup>  
 
 

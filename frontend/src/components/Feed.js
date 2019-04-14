@@ -49,7 +49,17 @@ class Feed extends Component {
 				{
 					this.state.posts ?
 						(this.state.posts.map((item, i) => {
-							return (<Post user={item.user} postID={item.postID} lower={this.lowerBalance} balance={this.state.balance} image={item.image} likes={item.likes} desc={item.desc} title={item.title} key={i}></Post>);
+							console.log(item);
+							let time;
+							if(item.timestamp) {
+								time = item.timestamp.seconds;
+							} else {
+								time = '0';
+							}
+							
+							return (<Post userID={item.userID} user={item.user} postID={item.postID} lower={this.lowerBalance} 
+								balance={this.state.balance} image={item.image} likes={item.likes} desc={item.desc} title={item.title} 
+								timestamp={time} key={i}></Post>);
 						}))
 						:
 						<div style={{ textAlign: 'center', margin: '40vh' }}>
