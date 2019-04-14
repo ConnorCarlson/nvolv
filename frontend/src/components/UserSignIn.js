@@ -33,13 +33,11 @@ export default class UserSignIn extends Component {
         return (
             <React.Fragment>
                 <Container>
-                    {/*
                     <div className="text-center mb-4  mt-4">
                         <Link to="/home">
-                            <img width="20%" alt="Logo" src={require("../assets/satellitesmash.png")}></img>
+                            <img width="10%" alt="Logo" src="./symbol.png"></img>
                         </Link>
                     </div>
-                    */}
                     <Form autoComplete="false" style={{ width: "50%", marginLeft: 'auto', marginRight: 'auto' }}>
                         <FormGroup>
                             <Label for="email">Email</Label>

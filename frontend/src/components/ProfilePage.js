@@ -4,8 +4,7 @@ import 'firebase/firestore';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { Button, Form, FormGroup, Label, Input, FormText, InputGroup } from 'reactstrap';
-
-
+import DetectUser from './DetectUser';
 
 export default class ProfilePage extends Component {
     constructor() {
@@ -151,6 +150,7 @@ export default class ProfilePage extends Component {
             <div>
                 <Form style={{width: '80vw', margin: "auto"}}>
                 <h2 style={{marginTop: '25px'}}>Edit Profile</h2>
+                <DetectUser />
                 <FormGroup>
 							<Label for="exampleFile">Profile Picture</Label>
 							<Input type="file" name="file" accept=".jpg,.png,.jpeg,.gif" onChange={(event) => {

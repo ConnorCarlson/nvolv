@@ -22,7 +22,7 @@ export default class UserSignUp extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((firebaseUser) => {
                 let id = firebaseUser.user.uid;
-                let data = { 
+                let data = {
                     username: this.state.displayName,
                     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg',
                     balance: 0,
@@ -50,13 +50,11 @@ export default class UserSignUp extends Component {
         return (
             <React.Fragment>
                 <Container>
-                    {/*
                     <div className="text-center mb-4  mt-4">
                         <Link to="/home">
-                            <img width="20%" alt="Logo" src={require("../assets/satellitesmash.png")}></img>
+                            <img width="10%" alt="Logo" src="./symbol.png"></img>
                         </Link>
                     </div>
-                    */}
                     <Form style={{ width: "50%", marginLeft: 'auto', marginRight: 'auto' }}>
                         <FormGroup>
                             <Label for="displayName">Username</Label>
