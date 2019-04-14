@@ -10,8 +10,9 @@ export default class ProfilePage extends Component {
     constructor() {
         super();
         this.state = {
-            email: null,
+            email: '',
             photoUrl: null,
+            username: '',
             bio: '',
             confirm: null,
             error: null,
@@ -122,7 +123,6 @@ export default class ProfilePage extends Component {
             // no verifications.. for now
             this.setState({balanceToAdd: 0});
         } else {
-            
             this.setState({balanceToWithdraw: 0});
             if(this.state.balance < amount) {
                 console.log("Error: can't withdraw more than current balance");
@@ -192,13 +192,12 @@ export default class ProfilePage extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="username">Username</Label>
-                        <Input type="text" name="username" id="exampleUsername" onChange={(event) => this.updateValue("username", event.target.value)} value={this.state.username} placeholder="username" />
+                        <Input type="text" name="username" id="exampleUsername" onChange={(event) => this.updateValue("username", event.target.value)} value={this.state.username} placeholder="Username" />
                     </FormGroup>
                     <FormGroup>
                         <Label for="description">Description</Label>
                         <Input type="text" name="description" id="exampleDescription" onChange={(event) => this.updateValue("bio", event.target.value)} value={this.state.bio} placeholder="description" />
                     </FormGroup>                    
-                    
                     
                     <Button onClick={this.saveProfile}>Save</Button>
                     <h2 style={{marginTop: '25px'}}>Manage Balance</h2>

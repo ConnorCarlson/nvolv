@@ -15,7 +15,7 @@ export default class Upload extends Component {
         this.state = {
             dataUrl: null,
             loading: false,
-            profilePic: null,
+            file: null,
             showLoader: false,
             actualCrop: {
                 width: 50,
@@ -40,9 +40,13 @@ export default class Upload extends Component {
 
     getCroppedImg(image, pixelCrop, fileName) {
         const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!pixelCrop.height) {
+            pixelCrop.height = image.naturalHeight;
+            pixelCrop.width = image.naturalWidth;
+        }
         canvas.width = pixelCrop.width;
         canvas.height = pixelCrop.height;
-        const ctx = canvas.getContext('2d');
         ctx.drawImage(
             image,
             pixelCrop.x,
@@ -138,7 +142,7 @@ export default class Upload extends Component {
                                     })
                                 }, false);
                                 reader.readAsDataURL(event.target.files[0]);
-                                this.setState({ file: event.target.files[0], picUrl: null })
+                                this.setState({ file: event.target.files[0], picUrl: null });
                             }} id="exampleFile" />
                             {this.state.dataUrl &&
                                 <React.Fragment>
