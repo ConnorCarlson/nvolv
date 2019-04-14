@@ -10,15 +10,12 @@ let PORT = process.env.PORT || 8080;
 
 process.env.NODE_ENV = "production";
 
-//Static file declaration
-app.use(express.static(path.join(__dirname, 'frontend/build')));
-
 //production mode
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'frontend/build')));
+    app.use(express.static(path.join(__dirname, 'frontend')));
     //
     app.get('/', (req, res) => {
-        res.sendfile(path.join(__dirname = 'frontend/build/index.html'));
+        res.sendfile(path.join(__dirname = 'frontend/index.html'));
     })
 } else {
     //build mode
