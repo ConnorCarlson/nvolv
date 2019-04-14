@@ -36,8 +36,12 @@ exports.makeLike = function (userID, postID, res) {
 					db.runTransaction(t => {
 						return t.get(postUserRef)
 							.then(poster => {
-								let newBalancePoster = poster.data().balance + 1;
-								t.update(postUserRef, { balance: newBalancePoster });
+                                if(poster.data()) {
+                                    let newBalancePoster = poster.data().balance + 1;
+                                    t.update(postUserRef, { balance: newBalancePoster });
+                                } else{
+                                    return;
+                                }
 							});
 					}).then(doc => {
                         // update people who liked post
@@ -60,14 +64,14 @@ exports.makeLike = function (userID, postID, res) {
                             }).then(result => {
                                 res.send({ newLikes: result, message: 'Transaction success!' });
                             }).catch(err => {
-                                res.send('Transaction failure 4:', err);
+                                res.send({message: 'Transaction failure 4:'+ err});
                             });
 						}).catch(err => {
-							res.send('Transaction failure 3:', err);
+							res.send({message: 'Transaction failure 3:'+ err});
 						});
 						
 					}).catch(err => {
-						res.send({ message: 'Transaction failure: ', err });
+						res.send({ message: 'Transaction failure2: ', err });
 					});
 				}
 			})
@@ -75,7 +79,7 @@ exports.makeLike = function (userID, postID, res) {
 				res.send('Error getting document', err);
 			});
 	}).catch(err => {
-		res.send({ message: 'Transaction failure: ' + err });
+		res.send({ message: 'Transaction failure1: ' + err });
 	});
 }
 
