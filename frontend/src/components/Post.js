@@ -10,9 +10,6 @@ const postStyle = {
     marginBottom: '25px' 
 };
 
-// takes props:
-// user
-// image
 class Post extends Component {
 
     render() {
