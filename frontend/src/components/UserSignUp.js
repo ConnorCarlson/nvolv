@@ -25,13 +25,15 @@ export default class UserSignUp extends Component {
                 let data = {
                     name: "", 
                     username: this.state.displayName,
-                    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'
+                    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg',
+                    balance: 0,
+                    bio: ""
                 }
                 let userRef = firebase.firestore().collection("users").doc(`${id}`);
                 userRef.set(data);
                 firebase.auth().currentUser.updateProfile({
                     displayName: this.state.displayName,
-                    photoURL: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'
+                    photoURL: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg',
                 }).then(() => {
                     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
                     window.location.hash = "#/profile";
