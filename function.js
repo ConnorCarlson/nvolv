@@ -65,7 +65,6 @@ exports.makeLike = function(userID, postID, res) {
       }).catch(err => {
         res.send('Transaction failure:', err);
       });
-
 }
 
 
