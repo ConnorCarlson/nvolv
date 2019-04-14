@@ -18,7 +18,7 @@ class Post extends Component {
                 <CardBody>
                     <CardTitle>{this.props.user}</CardTitle>
                     <CardImg src={this.props.image}></CardImg>
-                    <LikeButton postID={this.props.postID} likes={this.props.likes}></LikeButton>
+                    <LikeButton postID={this.props.postID} lowerBalance={this.props.lower} balance={this.props.balance} likes={this.props.likes}></LikeButton>
                 </CardBody>
             </Card>
         );

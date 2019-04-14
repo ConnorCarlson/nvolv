@@ -102,13 +102,9 @@ export default class Upload extends Component {
                     }),
                     contentType: 'application/json',
                     success: data => {
-                        console.log(data);
                         window.location.hash = "#/";
                     }
                 })
-                // firebase.database().ref(`userData/${user.uid}`).child('data/photoUrl').set(url);
-                // this.setState({ confirm: "Information successfully updated!", photoURL: updateInfo.photoURL, picUrl: null });
-                // this.toggleLoader();
             });
         })
     }

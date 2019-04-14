@@ -19,9 +19,27 @@ class Feed extends Component {
 			querySnapshots.forEach((doc) => {
 				posts.push(doc.data());
 			});
-			this.setState({
-				posts: posts
-			});
+			let user = firebase.auth().currentUser;
+			if (user) {
+				firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(doc => {
+					if (doc.exists) {
+						this.setState({
+							balance: doc.data().balance,
+							posts: posts
+						});
+					}
+				})
+			} else {
+				this.setState({
+					posts: posts
+				});
+			}
+		});
+	}
+
+	lowerBalance = () => {
+		this.setState({
+			balance: this.state.balance - 1
 		});
 	}
 
@@ -30,8 +48,8 @@ class Feed extends Component {
 			<div>
 				{
 					this.state.posts ?
-						(this.state.posts.map(function (item, i) {
-							return (<Post user={item.user} postID={item.postID} image={item.image} likes={item.likes} key={i}></Post>);
+						(this.state.posts.map((item, i) => {
+							return (<Post user={item.user} postID={item.postID} lower={this.lowerBalance} balance={this.state.balance} image={item.image} likes={item.likes} key={i}></Post>);
 						}))
 						:
 						<div style={{ textAlign: 'center', margin: '40vh' }}>
