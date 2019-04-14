@@ -111,7 +111,7 @@ export default class Upload extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width: '80vw', margin: "auto"}}>
                 <DetectUser />
                 {this.state.loading
                     ?

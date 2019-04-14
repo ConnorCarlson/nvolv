@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
-import { Button, Spinner } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -56,9 +56,9 @@ class Feed extends Component {
 							<Spinner></Spinner>
 						</div>
 				}
-				<div className='text-center'>
+				{/*<div className='text-center'>
 					<Button color='primary'>Show More</Button>
-				</div>
+			</div>*/}	
 			</div>
 		);
 	}

@@ -28,7 +28,6 @@ class LikeButton extends React.Component {
       }),
       contentType: 'application/json',
       success: data => {
-        console.log(data);
         this.setState({
           likes: data.newLikes
         });
