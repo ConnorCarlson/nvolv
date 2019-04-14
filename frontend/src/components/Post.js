@@ -3,7 +3,6 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 import LikeButton from './LikeButton';
-import LikeCounter from './LikeCounter';
 
 const postStyle = {
     width: '50vw',
@@ -15,14 +14,14 @@ const postStyle = {
 // user
 // image
 class Post extends Component {
+
     render() {
         return (
             <Card style={postStyle}>
                 <CardBody>
                     <CardTitle>{this.props.user}</CardTitle>
                     <CardImg src={this.props.image}></CardImg>
-                    <LikeButton></LikeButton>
-                    <LikeCounter likes={this.props.likes}></LikeCounter>
+                    <LikeButton postID={this.props.postID} likes={this.props.likes}></LikeButton>
                 </CardBody>
             </Card>
         );
